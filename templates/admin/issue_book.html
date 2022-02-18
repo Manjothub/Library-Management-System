@@ -1,0 +1,30 @@
+{% extends 'common/admin_navbar.html' %}
+{% load static %}
+{% block title %} Issue Book {% endblock %}
+{% block css %}
+{% endblock %}
+{% block body %}
+<div class="container mt-4">
+    <form method="POST"> {% csrf_token %}
+        {% for i in form %}
+        <div class="form-group">
+            <br>
+          <label class="control-label col-xs-4">{{ i.label_tag }}</label>
+          <div class="col-xs-8 mt-2">
+          {{ i }}
+           </div>
+        </div>
+        {% endfor %}
+    <button type="submit" class="btn btn-outline-primary mt-4">Issue Book</button>
+</div>
+</form>
+{% endblock %}
+{% block js %}
+<!-- <script>
+    {% if alert %}
+    alert("Book Successfully Issued.")
+    document.location = "/issue_book"
+    {% endif %}
+</script> -->
+{% endblock %}
+

@@ -1,0 +1,99 @@
+{% extends 'common/basic.html' %}
+{% load static %}
+{% block title %} Library Management System {% endblock %}
+{% block css %}
+.btn-color{
+    background-color: #0e1c36;
+    color: #fff;
+    
+  }
+  
+  .profile-image-pic{
+    height: 200px;
+    width: 200px;
+    object-fit: cover;
+  }
+  
+  
+  
+  .cardbody-color{
+    background-color: #ebf2fa;
+  }
+  
+  a{
+    text-decoration: none;
+  }
+{% endblock %}
+{% block body %}
+
+
+<div style="margin: 50px;">
+    <h2 style="text-align: center; ">Admin Panel</h2>
+    
+</div>
+
+  <div style="border: 1px solid rgb(238, 236, 236); box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1); width: 30%; margin: auto; height: 60vh; margin-top: 100px;" >
+      
+
+      <div>
+            <div class="center">
+                <img src="{% static 'images/admin-login-logo.png' %}" alt="image" style="border-radius: 50%; height: 150px; width: 150px; display: block; margin-left: auto; margin-right: auto; margin-top: -70px;">
+            </div>
+        
+            <form method="POST" style="margin-top: 17%; margin-left: 15px;">
+                 {% csrf_token %}
+
+                <label style="margin-left: 15px;">UserName</label>
+                <input type="text" style="height: 45px; width: 90%; margin: 0 15px;" name="username" placeholder="Enter UserName" />
+                
+                <label style=" margin-top: 10px; margin-left: 15px;">Password</label>
+                <input type="password" name="password" name="username" style="height: 45px; width: 90%; margin-top: 20px; margin: 0 15px;" name="password" placeholder="Enter Password"/>
+                <button type="submit" style="margin-top: 30px; margin-left: 15px; padding: 12px; background-color: #555;border: none; outline: none; width: 90%; color: #fff; ">Login</button>
+                <!-- <input type="button" type="submit" value="Login"  /> -->
+
+                <footer style="margin-top: 50px;">
+                    <p style="font-size: 14px;"><b>Note:</b> Only the admin can login from here. No student will be allowed to login.</p>
+                </footer>
+            </form>
+        
+      </div>
+
+  </div>
+  {% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="container">
+<br>
+<h1 class="text-center"><u>Admin Login</u></h1><br>
+<p><b>Note:</b> Only the admin can login from here. No student will be allowed to login.</p>
+    <form method="POST"> {% csrf_token %}
+
+    <div class="row mt-4">
+        <div class="form-group col-md-12">
+            <label><i style="font-weight: bold;">Username</i></label>
+            <input type="text" class="form-control mt-2" name="username" placeholder="Enter Username" required>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="form-group col-md-12">
+            <label><i style="font-weight: bold;">Password</i></label>
+            <input type="password" class="form-control mt-2" name="password" placeholder="Enter Password" required>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-outline-primary mt-4">Login</button>
+</div> -->
+

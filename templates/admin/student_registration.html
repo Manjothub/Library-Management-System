@@ -1,0 +1,247 @@
+{% extends 'common/basic.html' %}
+{% load static %}
+{% block title %} Library Management System {% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/register.css' %}">
+{% endblock %}
+{% block body %}
+<section class="h-100 ">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col">
+          <div class="card card-registration my-4">
+            <div class="row g-0">
+              <div class="col-xl-6 d-none d-xl-block">
+                <img
+                  src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/img4.webp"
+                  alt="Sample photo"
+                  class="img-fluid"
+                  style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem; margin-top: 43px;"
+                />
+              </div>
+              <div class="col-xl-6">
+                <div class="card-body p-md-5 text-black">
+                  <h3 class="mb-5 text-uppercase">Student registration form</h3>
+                <form method="POST" action="{% url 'student_registration' %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                  <div class="row">
+                      <div class="form-outline mb-4">
+                        <input type="text" id="form3Example1m" class="form-control form-control-lg" name="username" placeholder="Username" />
+                        
+                      </div>
+                      <div class="form-outline mb-4">
+                        <input type="text" id="form3Example1m" class="form-control form-control-lg" name="first_name" placeholder="First Name" />
+                        
+                      </div>
+                    
+                    
+                      <div class="form-outline mb-4">
+                        <input type="text" id="form3Example1n" class="form-control form-control-lg" name="last_name" placeholder="Last Name" />
+                        
+                      </div>
+                    
+                    
+                        <div class="form-outline mb-4">
+                          <input type="text" id="form3Example1m1" class="form-control form-control-lg" name="phone" placeholder="Mobile Number" />
+                          
+                        </div>
+                      
+                  </div>
+                  <!-- <div class="row">
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                        <input type="text" id="form3Example1m1" class="form-control form-control-lg" />
+                        <label class="form-label" for="form3Example1m1">Mother's name</label>
+                      </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                        <input type="text" id="form3Example1n1" class="form-control form-control-lg" />
+                        <label class="form-label" for="form3Example1n1">Father's name</label>
+                      </div>
+                    </div>
+                  </div> -->
+                  <div class="row">
+
+                    
+                      <div class="form-outline mb-4">
+                        <!-- <label class="form-label" for="form3Example1n1">Branch Name</label> -->
+                        <input type="text" id="form3Example1n1" class="form-control form-control-lg" name="branch" placeholder="Branch Name" />
+                        
+                      </div>
+                    
+                    
+                      <div class="form-outline mb-4">
+                        <input type="text" id="form3Example1n1" class="form-control form-control-lg" name="roll_no" placeholder="Roll Number" />
+                        
+                      </div>
+                    
+                    <div class="form-outline mb-4">
+                        <input type="text" id="form3Example97" class="form-control form-control-lg" name="email" placeholder="Email" />
+                        
+                      </div>
+                  </div>
+
+                  <div class="form-outline">
+                    <select class="form-outline mb-4" style="width: 100%; height: 45px; border: 1px solid rgb(199, 199, 199); font-size: 18px;" name="gender">
+                        <option>Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="FeMale">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+
+                  </div>
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="form3Example9">DOB</label>
+                    <input type="date" id="form3Example9" class="form-control form-control-lg" name="dob_student" />
+                  </div>  
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="form3Example9">Image</label>
+                    <input type="file" id="form3Example9" class="form-control form-control-lg" name="image" />
+                  </div>  
+                  <div class="form-outline mb-4">
+                    <input type="password" id="form3Example9" class="form-control form-control-lg" name="password" placeholder="Password"/>
+                  </div>  
+                  <div class="form-outline mb-4">
+                    <input type="password" id="form3Example9" class="form-control form-control-lg" name="confirm_password" placeholder="Confirm Password" />
+                  </div>  
+                  <div class="d-flex justify-content-end pt-3">
+                    <button type="submit" class="btn btn-warning btn-lg ms-2">Submit form</button>
+                  </div>
+                </div>
+            </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="container">
+    <form method="POST" enctype="multipart/form-data"> {% csrf_token %}
+        <br>
+        <h1 class="text-center"><u>Student Registration</u></h1>
+    <div class="row mt-4">
+        <div class="form-group col-md-12">
+            <label><i style="font-weight: bold;">Username</i></label>
+            <input type="text" class="form-control mt-2" name="username" placeholder="Enter Username" required>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="form-group col-md-6">
+            <label><i style="font-weight: bold;">First Name</i></label>
+            <input type="text" class="form-control mt-2" name="first_name" placeholder="Enter First Name" required>
+        </div>
+        <div class="form-group col-md-6">
+            <label><i style="font-weight: bold;">Last Name</i></label>
+            <input type="text" class="form-control mt-2" name="last_name" placeholder="Enter Last Name" required>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="form-group col-md-6">
+            <label><i style="font-weight: bold;">Email</i></label>
+            <input type="email" class="form-control mt-2" name="email" placeholder="Enter Email" required>
+        </div>
+        <div class="form-group col-md-6">
+            <label><i style="font-weight: bold;">Mobile Number</i></label>
+            <input type="number" class="form-control mt-2" name="phone" placeholder="Enter Mobile Number" required>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="form-group col-md-6">
+            <label><i style="font-weight: bold;">Branch Name</i></label>
+            <input type="text" class="form-control mt-2" name="branch" placeholder="Enter Branch Name" required>
+        </div>
+        <div class="form-group col-md-6">
+            <label><i style="font-weight: bold;">Class Name</i></label>
+            <input type="text" class="form-control mt-2" name="classroom" placeholder="Enter Class Name" required>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="form-group col-md-6">
+            <label><i style="font-weight: bold;">Roll Number</i></label>
+            <input type="text" class="form-control mt-2" name="roll_no" placeholder="Enter Roll Number" required>
+        </div>
+        <div class="form-group col-md-6">
+            <label><i style="font-weight: bold;">Student Image</i></label>
+            <input type="file" class="form-control mt-2" name="image" required>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="form-group col-md-6">
+            <label><i style="font-weight: bold;">Password</i></label>
+            <input type="password" class="form-control mt-2" name="password" placeholder="Enter Password" required>
+        </div>
+        <div class="form-group col-md-6">
+            <label><i style="font-weight: bold;">Confirm Password</i></label>
+            <input type="password" class="form-control mt-2" name="confirm_password" placeholder="Confirm Password" required>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-outline-primary mt-4">Register As Student</button>
+</div>
+</form>
+{% endblock %}
+{% block js %} -->
+<!-- <script>
+    {% if alert %}
+    alert("Registration Successfull.")
+    document.location = "/student_login"
+    {% endif %}
+</script> -->
+{% endblock %}
+
