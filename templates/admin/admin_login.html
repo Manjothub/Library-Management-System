@@ -2,7 +2,7 @@
 {% load static %}
 {% block title %} Library Management System {% endblock %}
 {% block css %}
-.btn-color{
+<!-- .btn-color{
     background-color: #0e1c36;
     color: #fff;
     
@@ -22,7 +22,7 @@
   
   a{
     text-decoration: none;
-  }
+  } -->
 {% endblock %}
 {% block body %}
 
@@ -44,10 +44,10 @@
                  {% csrf_token %}
 
                 <label style="margin-left: 15px;">UserName</label>
-                <input type="text" style="height: 45px; width: 90%; margin: 0 15px;" name="username" placeholder="Enter UserName" />
+                <input type="text" style="height: 45px; width: 90%; margin: 0 15px;" name="username" placeholder="Enter Username" />
                 
                 <label style=" margin-top: 10px; margin-left: 15px;">Password</label>
-                <input type="password" name="password" name="username" style="height: 45px; width: 90%; margin-top: 20px; margin: 0 15px;" name="password" placeholder="Enter Password"/>
+                <input type="password" name="password" style="height: 45px; width: 90%; margin-top: 20px; margin: 0 15px;" name="password" placeholder="Enter Password"/>
                 <button type="submit" style="margin-top: 30px; margin-left: 15px; padding: 12px; background-color: #555;border: none; outline: none; width: 90%; color: #fff; ">Login</button>
                 <!-- <input type="button" type="submit" value="Login"  /> -->
 

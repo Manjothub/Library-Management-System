@@ -1,0 +1,228 @@
+{% extends 'common/basic.html' %}
+{% load static %}
+{% block body %}
+  
+  <!-- Modal for adding Books -->
+  <div class="modal fade" id="AddBook" tabindex="-1" aria-labelledby="AddBookBody" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="AddBookBody">Add Book</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          
+            <form method="POST" action="{% url 'add_book' %}">
+                 {% csrf_token %}
+                <div class="row mt-4">
+                    <div class="form-group col-md-12">
+                        <label><i style="font-weight: bold;">Book Name</i></label>
+                        <input type="text" class="form-control mt-2" name="name" placeholder="Enter name of the Book" required>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="form-group col-md-12">
+                        <label><i style="font-weight: bold;">Author Name</i></label>
+                        <input type="text" class="form-control mt-2" name="author" placeholder="Enter name of the Author" required>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="form-group col-md-12">
+                        <label><i style="font-weight: bold;">ISBN Number</i></label>
+                        <input type="text" class="form-control mt-2" name="isbn" placeholder="Enter ISBN number of the book" required>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="form-group col-md-12">
+                        <label><i style="font-weight: bold;">Volume </i></label>
+                        <input type="text" class="form-control mt-2" name="volume" placeholder="Enter volume name" required>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="form-group col-md-12">
+                        <label><i style="font-weight: bold;">Category</i></label>
+                        <input type="text" class="form-control mt-2" name="category" placeholder="Enter Category of the book" required>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="form-group col-md-12">
+                        <label><i style="font-weight: bold;">Description</i></label>
+                        <textarea name="book_desc" class="form-control mt-2" id="" cols="30" rows="5"></textarea>
+                        <!-- <input type="text" class="form-control mt-2" name="category" placeholder="Enter Category of the book" required> -->
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="form-group col-md-12">
+                        <label><i style="font-weight: bold;">Published Date</i></label>
+                        <input type="date" class="form-control mt-2" name="publish_date" required>
+                    </div>
+                </div>
+                <div class="row-mt-4">
+                    <div class="form-group col-md-12">
+                        <span>Availability </span>
+                        <input type="checkbox" name="check" id="" checked>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary mt-5">Add Book</button>
+            </form>
+
+        </div>
+        
+      </div>
+    </div>
+  </div>
+<!-- Model End -->
+
+
+
+<!-- Modal for Issue Books -->
+<div class="modal fade" id="issueBook" tabindex="-1" aria-labelledby="issueBookBody" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="issueBookBody">Issue Book</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          
+            <form method="POST" action="{% url 'issue_book' %}">
+                 {% csrf_token %}
+                <div class="row mt-4">
+                    <div class="form-group col-md-12">
+                        <label><i style="font-weight: bold;">Book Name</i></label>
+                        <input type="text" class="form-control mt-2" name="name" placeholder="Enter name of the Book" required>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="form-group col-md-12">
+                        <label><i style="font-weight: bold;">Author Name</i></label>
+                        <input type="text" class="form-control mt-2" name="author" placeholder="Enter name of the Author" required>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="form-group col-md-12">
+                        <label><i style="font-weight: bold;">ISBN Number</i></label>
+                        <input type="text" class="form-control mt-2" name="isbn" placeholder="Enter ISBN number of the book" required>
+                    </div>
+                </div>                
+                <div class="row mt-4">
+                    <div class="form-group col-md-12">
+                        <label><i style="font-weight: bold;">Volume </i></label>
+                        <input type="text" class="form-control mt-2" name="volume" placeholder="Enter volume name" required>
+                    </div>
+                </div>
+                
+                <div class="row mt-4">
+                    <div class="form-group col-md-12">
+                        <label><i style="font-weight: bold;">Category</i></label>
+                        <input type="text" class="form-control mt-2" name="category" placeholder="Enter Category of the book" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary mt-5">Add Book</button>
+            </form>
+
+        </div>
+        
+      </div>
+    </div>
+  </div>
+<!-- Model End -->
+
+ 
+    <div style="margin: 0 50px">
+
+    <div>
+        <h3 style="font-weight: 800; margin-top: -45px;">ADMIN DASHBOARD</h3>
+        <hr />
+    </div>
+    {% include 'common/error.html '%}
+    <div class="row all-boxes">
+
+        <div class="col-md-3">
+            <a href="#" style="color: #D9534F; text-decoration: none;">
+                <div class="card text-center" style="margin: 35px 0; padding: 10px; box-shadow: 5px 5px 5px rgba(0,0,0,0.1);">
+                    <div class="text-center">
+                        <i class="fa-solid fa-users" style="font-size: 89px;margin: 15px;"  ></i>
+                    </div>
+                    <h4>2</h4>
+                    <h3>Students</h3>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card text-center" data-bs-toggle="modal" data-bs-target="#AddBook" style="cursor: pointer; margin: 35px 0; padding: 10px; box-shadow: 5px 5px 5px rgba(0,0,0,0.1);">
+                <div class="text-center">
+                    <i class="fa-solid fa-book-medical" style="font-size: 89px;margin: 15px;"  ></i>
+                </div>
+                <h4>2</h4>
+                <h3>Add Books</h3>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <a href="{% url 'view_books' %}" style="color: #34656D; text-decoration: none;">
+            <div class="card text-center" style="margin: 35px 0; padding: 10px; box-shadow: 5px 5px 5px rgba(0,0,0,0.1);">
+                <div class="text-center">
+                    <i class="fa-solid fa-book" style="font-size: 89px;margin: 15px;"  ></i>
+                </div>
+                <h4>2</h4>
+                <h3>Books List</h3>
+            </div>
+            </a>
+        </div>
+
+        <div class="col-md-3">
+            <a href="{% url 'view_issued_book' %}" style="color: rgb(61, 60, 60); text-decoration: none;">
+            <div class="card text-center" style="margin: 35px 0; padding: 10px; box-shadow: 5px 5px 5px rgba(0,0,0,0.1);">
+                <div class="text-center">
+                    <i class="fa-solid fa-list-check" style="font-size: 89px;margin: 15px;"  ></i>
+                </div>
+                <h4>2</h4>
+                <h3>Issued Books</h3>
+            </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="row all-boxes">
+
+        <div class="col-md-3">
+            <div class="card text-center" data-bs-toggle="modal" data-bs-target="#issueBook" style="margin: 35px 0; padding: 10px; box-shadow: 5px 5px 5px rgba(0,0,0,0.1);">
+                <div class="text-center">
+                    <i class="fa-solid fa-money-check-dollar" style="font-size: 89px;margin: 15px;" ></i>
+                </div>
+                <h4>2</h4>
+                <h3>Issue a Book</h3>
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+            <a href="#" style="color: #3E8E7E; text-decoration: none;">
+            <div class="card text-center" style="margin: 35px 0; padding: 10px; box-shadow: 5px 5px 5px rgba(0,0,0,0.1);">
+                <div class="text-center">
+                    <i class="fa-solid fa-sitemap" style="font-size: 89px;margin: 15px;"  ></i>
+                </div>
+                <h4>2</h4>
+                <h3>Category List</h3>
+            </div>
+            </a>
+        </div>
+
+        <div class="col-md-3">
+            <a href="{% url 'adminprofile' %}" style="color: #055052; text-decoration: none;">
+            <div class="card text-center" style="margin: 35px 0; padding: 10px; box-shadow: 5px 5px 5px rgba(0,0,0,0.1);">
+                <div class="text-center">
+                    <i class="fa-solid fa-id-card" style="font-size: 89px;margin: 15px;"  ></i>
+                </div>
+                <h3>Profile</h3>
+            </div>
+            </a>
+        </div>
+        </div>
+
+
+
+</div>
+{% endblock %}

@@ -1,0 +1,302 @@
+html {
+scroll-behavior: smooth;
+}
+:root{
+scrollbar-color: rgb(210,210,210) rgb(46,54,69) !important;
+scrollbar-width: thin !important;
+}
+::-webkit-scrollbar {
+height: 12px;
+width: 8px;
+background: #fff; color: #000;;
+}
+::-webkit-scrollbar-thumb {
+background: gray;
+/* -webkit-box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.75); */
+}
+::-webkit-scrollbar-corner {
+background: #fff; color: #000;;
+}
+
+
+
+
+
+
+
+
+body{
+margin:0;
+overflow-x:hidden;
+background:#fff;
+font-family: 'Oswald', sans-serif;
+}
+
+a,li,em,button,input,textarea,select{
+text-decoration:none;
+list-style:none;
+font-style:normal;
+outline:none !important;
+transition:0.5s;
+resize:none;
+}
+
+ul{
+position:relative;
+left:-20px;
+}
+
+ul li{
+padding:20px 0;
+color:gray;
+/* border-bottom:1px solid rgba(255,255,255,0.1); */
+}
+
+b{
+color:#fff;
+}
+
+.btn{
+background:#7ed321;
+padding:10px;
+border:0;
+outline:none;
+color:#fff; color: #000;;
+display:block;
+width:60px;
+margin:10px 0;
+text-align:Center;
+border-radius:5px;
+cursor:pointer;
+}
+
+
+.fa{
+color:#7ed321;
+cursor:pointer;
+margin-top: -60px;
+}
+
+
+
+
+
+
+.container{
+width:90%;
+margin:10vh auto;
+}
+
+.container table{
+width:100%;
+}
+
+.container table td{
+margin:30px;
+border-radius:5px;
+/* box-shadow:0px 6px 16px -6px rgba(1,1,1,0.5); */
+padding:30px;
+background-color:#fff; color: #000;;
+color:#fff;
+vertical-align:top;
+}
+
+.container table td:nth-child(1){
+text-align:Center;
+}
+
+.container table td:nth-child(2) .fa{
+float:right;
+}
+
+.container table td:nth-child(2) input{
+background:none;
+outline:none;
+border:0;
+color:gray;
+width:60%;
+pointer-events:none;
+}
+
+.container table td:nth-child(1) section{
+position:relative;
+width:200px;
+height:200px;
+margin:5vh auto;
+}
+
+
+.container table td:nth-child(1) .fa{
+position:absolute;
+right:25px;
+top:25px;
+font-size:2em;
+}
+
+.container table td img{
+width:200px;
+height:200px;
+border-radius:50%;
+margin-top: -60px;
+}
+
+.container table td h3{
+color:gray;
+margin-top: -80px;
+font-weight:normal;
+}
+
+.container table .section2{
+text-align:left;
+}
+
+.container table .section2 label{
+display:block;
+margin:10px 0;
+text-align:left;
+} 
+
+.container table .section2 select{
+background:#1e1e1e;
+width:100%;
+padding:19px;
+border:0;
+outline:none;
+color:gray;
+}
+
+.container table .section2 input{
+background:#1e1e1e;
+width:90%;
+padding:20px;
+color:gray;
+border:0;
+outline:none;
+}
+
+.container table .section2 .quantityselector{
+height:80px;
+border-bottom:0px;
+}
+
+.container table .section2 .quantityselector section{
+display:inline-block !important;
+width:45%;
+margin:0 10px;
+}
+
+.container table textarea{
+width:90%;
+resize:none;
+outline:none;
+border:0;
+background:#1e1e1e;
+color:gray;
+padding:20px;
+}
+
+
+
+.container .inframe .card{
+width:100%;
+height:40vh;
+position:relative;
+overflow:hidden;
+display:block;
+margin:10px 0;
+}
+
+.container .inframe .card img{
+width:100%;
+height:40vh;
+border-radius:0;
+}
+
+.card_content{
+height:0;
+position:absolute;bottom:0;
+width:100%;background-color:rgba(1,1,1,0.8);
+transition:0.5s;
+}
+
+.card_content ul li{
+padding:5px;
+font-size:13px;
+}
+
+.card_content h3{
+text-align:Center;
+color:#fff;
+}
+
+.inframe .card:hover > .card_content{
+height:40vh;
+}
+
+.card_content .btn{
+font-size:12px;
+width:100px;
+display:inline-block;
+margin:0 10px;
+}
+
+
+
+
+@media (max-width:820px){
+.container{
+width:100%;
+}
+.container table td{
+display:block;
+width:90%;
+margin:0px;
+}
+.container table .section2 .quantityselector section{
+width:41%;
+margin:0px 10px;
+}
+.container table .section2 ul{
+position:relative;
+left:-40px;
+}
+
+.container table .section2 .quantityselector{
+
+}
+}
+
+
+
+
+
+
+
+
+.alert {
+  padding: 20px;
+  background-color: #f44336;
+  color: white;
+  opacity: 1;
+  transition: opacity 0.6s;
+  margin-bottom: 15px;
+}
+
+.alert.success {background-color: #04AA6D;}
+.alert.info {background-color: #2196F3;}
+.alert.warning {background-color: #ff9800;}
+
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.closebtn:hover {
+  color: black;
+}

@@ -8,9 +8,13 @@ class Book(models.Model):
     author = models.CharField(max_length=200)
     isbn = models.PositiveIntegerField()
     category = models.CharField(max_length=50)
+    volume =  models.CharField(max_length=100,null=True)
+    description = models.CharField(max_length=300,null=True)
+    availability = models.BooleanField(default=True)
+    published_date = models.DateField(auto_now=False,null=True)
 
     def __str__(self):
-        return str(self.name) + " ["+str(self.isbn)+']'
+        return str(self.name) + " ["+(self.author)+']'
 
 class Student(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -25,10 +29,10 @@ class Student(models.Model):
         return str(self.user) + " ["+str(self.branch)+']' + " ["+str(self.roll_no)+']'
 
 
-def expiry():
-    return datetime.today() + timedelta(days=14)
+
+
 class IssuedBook(models.Model):
-    student_id = models.CharField(max_length=100, blank=True) 
+    user = models.OneToOneField(User, on_delete=models.DO_NOTHING,null=True)
+    book_name= models.ForeignKey(Book,on_delete=models.CASCADE,null=True)
     isbn = models.CharField(max_length=13)
     issued_date = models.DateField(auto_now=True)
-    expiry_date = models.DateField(default=expiry)

@@ -1,34 +1,242 @@
-{% extends 'common/admin_navbar.html' %}
+{% extends 'common/basic.html' %}
 {% load static %}
-{% block title %} Library Management System {% endblock %}
 {% block css %}
+  <link rel="stylesheet" href="{% static 'css/view_book.css' %}">
 {% endblock %}
+
 {% block body %}
-<div class="container mt-4">
-    <h1 class="text-center"><u>All Books List</u></h1>
-    <table class="table table-hover" id="example">
-        <thead>
+
+  <!-- edit Modal -->
+  <div class="modal fade" id="editBook" tabindex="-1" aria-labelledby="editBookBody" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editBookBody">Edit Book</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          
+            <form method="POST" action="{% url 'updatebook' %}" >
+                 {% csrf_token %}
+                <div class="row mt-4">
+                    <div class="form-group col-md-12">
+                        <label><i style="font-weight: bold;">Book Name</i></label>
+                        <input type="hidden" id="hiddenfield" name="id">
+                        <input type="text" class="form-control mt-2" name="name" placeholder="Enter name of the Book" id="bookname" required>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="form-group col-md-12">
+                        <label><i style="font-weight: bold;">Author Name</i></label>
+                        <input type="text" class="form-control mt-2" name="author" placeholder="Enter name of the Author" id="authorname" required>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="form-group col-md-12">
+                        <label><i style="font-weight: bold;">ISBN Number</i></label>
+                        <input type="text" class="form-control mt-2" name="isbn" placeholder="Enter ISBN number of the book" id="isbnnumber" required>
+                    </div>
+                </div>
+
+                
+                <div class="row mt-4">
+                    <div class="form-group col-md-12">
+                        <label><i style="font-weight: bold;">Volume </i></label>
+                        <input type="text" class="form-control mt-2" name="volume" placeholder="Enter volume name" id="bookvolume" required>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="form-group col-md-12">
+                        <label><i style="font-weight: bold;">Category</i></label>
+                        <input type="text" class="form-control mt-2" name="category" placeholder="Enter Category of the book" id="bookcategory" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary mt-5">Update</button>
+            </form>
+
+        </div>
+        
+      </div>
+    </div>
+  </div>
+<!-- Model End -->
+
+{% include 'common/error.html '%}
+<div class="container">
+    <div class="row py-5">
+      <div class="col-12">
+        <table id="example" class="" style="width:100%">
+          <thead>
             <tr>
-                <th>Sr.No</th>
-                <th>Book Name</th>
-                <th>Author</th>
-                <th>ISBN Number</th>
-                <th>Category</th>
-                <th>Delete</th>
+              <th>Sr.No</th>
+              <th>Book Name</th>
+              <th>Author</th>
+              <th>Volume</th>
+              <th>ISBN Number</th>
+              <th>Category</th>
+              <th>Action</th>
             </tr>
-        </thead>
-        <tbody>
-            {% for book in books %}
+          </thead>
+          <tbody id="showbooktablebody">
+            <!-- <td>{{forloop.counter}}.</td>
+            <td>{{book.name}}</td>
+            <td>{{book.author}}</td>
+            <td>{{book.isbn}}</td>
+            <td>{{book.category}}</td> -->
+              {% for book in books %}
             <tr>
-                <td>{{forloop.counter}}.</td>
-                <td>{{book.name}}</td>
-                <td>{{book.author}}</td>
-                <td>{{book.isbn}}</td>
-                <td>{{book.category}}</td>
-                <td><a href="/delete_book/{{book.id}}/" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this book?')">Delete</a></td>
+                <td>{{forloop.counter}}</td>
+              <td>
+                  <div class="d-flex align-items-center">
+                    <div class="">
+                      <p class="font-weight-bold mb-0">{{book.name}}</p>
+                    </div>
+                  </div>
+              </td>
+              <td>
+                <div class="d-flex align-items-center">
+                  <div class="">
+                    <p class="font-weight-bold mb-0">{{book.author}}</p>
+                  </div>
+                </div>
+            </td>
+            <td>
+                <div class="d-flex align-items-center">
+                  <div class="">
+                    {% if book.volume == None %}
+                    <p class="text-danger border-0">No Information Available</p>
+                    {% else %}
+                    <p class="font-weight-bold mb-0">{{book.volume}}</p>
+                    {% endif %}
+                  </div>
+                </div>
+            </td>
+            <td>
+                <div class="d-flex align-items-center">
+                  <div class="">
+                    <p class="font-weight-bold mb-0">{{book.isbn}}</p>
+                  </div>
+                </div>
+            </td>
+            <td>
+                <div class="d-flex align-items-center">
+                  <div class="">
+                    <p class="font-weight-bold mb-0">{{book.category}}</p>
+                  </div>
+                </div>
+            </td>
+            <td>
+                        <button type="button" id="updatebookbtn" class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#editBook" data-iid={{book.id}}>
+                            <i class="fas fa-edit"></i>
+                        </button>
+                    <a href="{% url 'deletebook' book.id %}" class="btn btn-sm bg-danger-light">
+                        <button type="submit" id="deletebtn" class="btn btn-danger">
+                            <i class="fas fa-trash"></i>
+                           </button>
+                    </a>
+            </td>
             </tr>
             {% endfor %}
-        </tbody>
-    </table>
+       </tbody>
+        </table>
+      </div>
     </div>
+  </div>
+
+
 {% endblock %}
+
+{% block js %}
+<script>
+    //edit product
+$(document).ready(function () {
+$("#example").DataTable({
+    aaSorting: [],
+    responsive: true,
+
+    columnDefs: [
+      {
+        responsivePriority: 1,
+        targets: 0
+      },
+      {
+        responsivePriority: 2,
+        targets: -1
+      }
+    ]
+  });
+
+  $(".dataTables_filter input")
+    .attr("placeholder", "Search here...")
+    .css({
+      width: "300px",
+      display: "inline-block"
+    });
+
+        $("#showbooktablebody").on('click', '#updatebookbtn', function () {
+            let id = $(this).attr('data-iid');
+            console.log(id)
+
+            var url = "{% url 'getbook' 1 %}".replace('1', $(this).attr('data-iid'));
+
+            $.ajax({
+                type: 'GET',
+                url: url,
+                success: function (res) {
+                    console.log(res)
+                    document.getElementById("bookname").value = res.res[0].name;
+                    document.getElementById("authorname").value = res.res[0].author;
+                    document.getElementById("isbnnumber").value = res.res[0].isbn;
+                    document.getElementById("bookvolume").value = res.res[0].volume;
+                    document.getElementById("bookcategory").value = res.res[0].category;
+                    $("#hiddenfield").attr('value', res.res[0].id);
+
+                }
+
+            });
+
+        });
+    });
+    
+
+
+</script>
+
+{% endblock  %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
