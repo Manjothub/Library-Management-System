@@ -1,0 +1,142 @@
+{% extends "common/basic.html" %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/slider_view.css' %}">
+{% endblock %}
+
+{% block body %}
+<body>
+    <div class="container">        
+        <div class="slide slide1 active ">
+          <span></span> 
+        </div>
+        
+        <div class="slide slide2">
+        </div>
+        
+        <div class="slide slide3">
+        </div>
+        
+        <div class="slide slide4">
+        </div>
+        
+        <div class="slide slide5">
+        </div>
+        
+        <div class="slide slide6">
+        </div>  
+      </div>  
+
+<!-- Cards  -->
+
+      <h2 style="margin-left: 3%; margin-top: 3%">See All Books here</h2>
+      <div class="row mt-5" style="justify-content: center; margin: 0 2%">
+        {% for book in books %}
+          <div class="profilecard" style="justify-content: center; width: 300px; padding: 10px; display: inline-block; margin: 9px; box-shadow: 5px 5px 5px rgba(0,0,0,0.1); ">
+            <img src="{{book.book_image.url}}" style="height: 300px; width: 297px; margin-left: -7px; margin-top: -6px;" />
+            <div style="font-size: 22px; font-weight: bold; margin: 4px;">{{book.name}}</div>
+            <div style="font-size: 16px; font-weight: bold; margin: 4px; color: #555;">{{book.author}}</div>
+            <div style="font-size: 14px; margin: 4px;color: #555;">{{book.description}}</div>
+            <button style="height: 45px; width: 110px; border: none; outline: none;  background: #fff; box-shadow: 2px 5px 14px rgb(0 0 0 / 10%); border-radius: 5px;">Preview</button>
+            <div style="font-size: 12px; float: right; margin-top: 51px;">Published on <b>{{book.published_date}}</b></div>
+          </div>
+          {% endfor %}
+      </div>
+{% endblock body %}
+
+{% block js %}
+<script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha236-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
+  <script>
+      let i=0 ;
+    
+    $('.slide').click(function(){
+       $('.active').addClass('nonActive').find('span').empty()
+        $(this).removeClass('nonActive').addClass('active')
+        i= $(this).index()
+    })
+    
+    setItner = setInterval(go,4000);
+    
+    function go(){
+       $('.active').addClass('nonActive').find('span').empty()
+        $($('.slide')[i%6]).removeClass('nonActive').addClass('active')
+        i++;
+    }
+    
+  </script>
+{% endblock js %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -202,3 +202,123 @@
     document.location = "/student_login"
     {% endif %}
 </script> -->
+
+
+
+<!-- {% include 'common/error.html '%}
+<div class="container">
+    <div class="row py-5">
+      <div class="col-12">
+        <table id="example" class="" style="width:100%">
+          <thead>
+            <tr>
+              <th>Sr.No</th>
+              <th>Book Name</th>
+              <th>Author</th>
+              <th>Volume</th>
+              <th>ISBN Number</th>
+              <th>Category</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="showbooktablebody">
+              {% for book in books %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+              <td>
+                  <div class="d-flex align-items-center">
+                    <div class="">
+                      <p class="font-weight-bold mb-0">{{book.name}}</p>
+                    </div>
+                  </div>
+              </td>
+              <td>
+                <div class="d-flex align-items-center">
+                  <div class="">
+                    <p class="font-weight-bold mb-0">{{book.author}}</p>
+                  </div>
+                </div>
+            </td>
+            <td>
+                <div class="d-flex align-items-center">
+                  <div class="">
+                    {% if book.volume == None %}
+                    <p class="text-danger border-0">No Information Available</p>
+                    {% else %}
+                    <p class="font-weight-bold mb-0">{{book.volume}}</p>
+                    {% endif %}
+                  </div>
+                </div>
+            </td>
+            <td>
+                <div class="d-flex align-items-center">
+                  <div class="">
+                    <p class="font-weight-bold mb-0">{{book.isbn}}</p>
+                  </div>
+                </div>
+            </td>
+            <td>
+                <div class="d-flex align-items-center">
+                  <div class="">
+                    <p class="font-weight-bold mb-0">{{book.category}}</p>
+                  </div>
+                </div>
+            </td>
+            <td>
+              <div class="d-flex align-items-center">
+                {% if book.availability == True %}
+                <div class="">
+                  <p class="font-weight-bold mb-0" style="color: rgb(43, 207, 43); font-size: 25px;"><i class="fa-solid fa-circle-check"></i></p>
+                </div>
+                {% else %}
+                <div class="">
+                  <p class="font-weight-bold mb-0" style="color: rgb(247, 47, 47); font-size: 25px; "><i class="fa-solid fa-circle-xmark"></i></p>
+                </div>
+                {% endif %}
+              </div>
+            </td>
+            <td>
+                        <button type="button" id="updatebookbtn" class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#editBook" data-iid={{book.id}}>
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+            </td>
+            </tr>
+            {% endfor %}
+       </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  
+{% endblock body %}
+
+{% block js %}
+  <script>
+$(document).ready(function () {
+$("#example").DataTable({
+    aaSorting: [],
+    responsive: true,
+
+    columnDefs: [
+      {
+        responsivePriority: 1,
+        targets: 0
+      },
+      {
+        responsivePriority: 2,
+        targets: -1
+      }
+    ]
+  });
+
+  $(".dataTables_filter input")
+    .attr("placeholder", "Search here...")
+    .css({
+      width: "300px",
+      display: "inline-block"
+    });
+});
+
+  </script>
+{% endblock js %} --> 

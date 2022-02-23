@@ -185,3 +185,12 @@
         background-color: #fcd3e1;
         color: #f66d9b;
       }
+
+/* 
+      table.dataTable thead .sorting{
+        width: 275px;
+      }
+
+      table.dataTable tbody th, table.dataTable tbody td{
+        width: 20%;
+      } */

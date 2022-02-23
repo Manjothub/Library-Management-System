@@ -28,6 +28,8 @@ urlpatterns = [
     path("change_password/",change_password, name="change_password"),
     path("student_login/", student_login, name="student_login"),
     path("student_dashboard", student_dashboard,name="studentdashboard"),
+    path("student_view_books",student_books_views,name="studentviewbooks"),
+    path("student/view_issued_books",student_issued_books , name="student_issued_book"),
 
     path("logout/", Logout, name="logout"),
     path("contact",contactus,name="contactpage")

@@ -9,6 +9,8 @@ class Book(models.Model):
     author = models.CharField(max_length=200)
     isbn = models.PositiveIntegerField()
     category = models.CharField(max_length=50)
+    book_image = models.ImageField(upload_to='uploads/book/image/',null=True,default="")
+    book_src = models.FileField(upload_to='uploads/book/book-pdf',null=True)
     volume =  models.CharField(max_length=100,null=True)
     description = models.CharField(max_length=300,null=True)
     availability = models.BooleanField(default=True)

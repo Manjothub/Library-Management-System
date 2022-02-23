@@ -22,34 +22,45 @@ def add_book(request):
         isbn = request.POST.get('isbn')
         category = request.POST.get('category')
         volume = request.POST.get('volume')
+        image = request.POST.get('bookimg')
+        book_pdf = request.POST.get('bookpdf')
         desc = request.POST.get('book_desc')
         publish = request.POST.get('publish_date')
         status = request.POST.get('check') == 'on'
-        books = Book.objects.create(name=name, author=author, isbn=isbn,volume=volume, category=category,description=desc, published_date=publish,availability = status)
-        books.save()
-        print(books)
-        # print('okkkkkk')
-        alert = True
-        return render(request, "admin/admin_dashboard.html", {'alert':alert})
+        books = Book.objects.create(name=name, author=author, isbn=isbn,volume=volume,book_image=image,book_src=book_pdf, category=category,description=desc, published_date=publish,availability = status)
+        if books is not None:
+            messages.success(request,'Book added Successfully')
+            books.save()
+            return redirect('admin_dashboard')
+        else:
+            messages.error(request,'Fill all the necessary details')
+            return redirect('admin_dashboard')        
     return render(request, "admin/admin_dashboard.html")
 
+
+
+@login_required(login_url = '/admin_login')
 def get_book(request,id):
     data = Book.objects.filter(id=id).values()
     return JsonResponse({'res': list(data)}, safe=False)
 
-
+@login_required(login_url = '/admin_login')
 def update_book(request):
     if request.method == "POST":
         id = request.POST.get("id")
         instance = Book.objects.get(id=id)
         ins = BookForm(request.POST,  instance=instance)
         if ins.is_valid():
-            ins.save()
+            # ins.save()
+            print('valid')
+            print(ins)
             messages.success(request, 'Book Updated Successfully')
             return redirect("view_books")
         messages.error(request, 'Book not Updated')
         return redirect("view_books")
 
+
+@login_required(login_url = '/admin_login')
 def delete_book(request,id):
     books = Book.objects.get(id=id)
     books.delete()
@@ -102,27 +113,18 @@ def view_issued_book(request):
 
 @login_required(login_url = '/student_login')
 def student_issued_books(request):
-    # student = Student.objects.filter(user_id=request.user.id)
-    # issuedBooks = IssuedBook.objects.filter(student_id=student[0].user_id)
-    # li1 = []
-    # li2 = []
+    user = request.user
+    student = Student.objects.filter(user=user)
+    issuedBooks = IssuedBook.objects.filter(student_name=student[0])
+    issuedBooksdata = IssuedBook.objects.filter(student_name=student[0]).count()
+    context={
+        'issuebooks':issuedBooks,
+        'issuedata' :issuedBooksdata
+    }
+    return render(request,'student/issued_book.html',context)
 
-    # for i in issuedBooks:
-    #     books = Book.objects.filter(isbn=i.isbn)
-    #     for book in books:
-    #         t=(request.user.id, request.user.get_full_name, book.name,book.author)
-    #         li1.append(t)
 
-    #     days=(date.today()-i.issued_date)
-    #     d=days.days
-    #     fine=0
-    #     if d>15:
-    #         day=d-14
-    #         fine=day*5
-    #     t=(issuedBooks[0].issued_date, issuedBooks[0].expiry_date, fine)
-    #     li2.append(t)
-    return render(request,'admin/student_issued_books.html')
-
+@login_required(login_url = '/admin_login')
 def admin_profile(request):
     user = User.objects.get(id=request.user.id)
     context ={
@@ -157,13 +159,14 @@ def edit_profile(request):
     return render(request, "student/edit_profile.html")
 
 
-
+@login_required(login_url = '/admin_login')
 def delete_student(request, myid):
     students = Student.objects.filter(id=myid)
     students.delete()
     messages.success(request,'Book Deleted Successfully')
     return redirect("/view_students")
 
+@login_required(login_url = '/admin_login')
 def change_password(request):
     if request.method == "POST":
         current_password = request.POST['current_password']
@@ -181,6 +184,7 @@ def change_password(request):
         except:
             pass
     return render(request, "common/change_password.html")
+
 
 def student_registration(request):
     if request.method == "POST":
@@ -227,6 +231,7 @@ def student_login(request):
             return render(request, "student/student_login.html", {'alert':alert})
     return render(request, "student/student_login.html")
 
+
 def admin_login(request):
     if request.method == "POST":
         username = request.POST['username']
@@ -248,12 +253,12 @@ def Logout(request):
     logout(request)
     return redirect ("/")
 
-
+@login_required(login_url = '/admin_login')
 def admin_dashboard(request):
     books = Book.objects.all()
     student = Student.objects.all()
     studentdata = Student.objects.all().count()
-    bookdata = Book .objects.all().count()
+    bookdata = Book.objects.all().count()
     
     bookissuedata = IssuedBook.objects.all().count()
     context ={
@@ -265,9 +270,22 @@ def admin_dashboard(request):
     }
     return render(request,'admin/admin_dashboard.html',context)
 
-
+@login_required(login_url = '/student_login')
 def student_dashboard(request):
-    return render(request,'student/student_dashboard.html')
+    books = Book.objects.all().count()
+    user = request.user
+    student = Student.objects.filter(user=user)
+    issuedBooksdata = IssuedBook.objects.filter(student_name=student[0]).count()
+    context={
+        'books':books,
+        'issuedBooksdata': issuedBooksdata     
+    }
+    return render(request,'student/student_dashboard.html',context)
 
 def contactus(request):
     return render(request,'common/contact_us.html')
+
+
+def student_books_views(request):
+    books = Book.objects.all()
+    return render(request,'student/view_books.html',{'books':books})

@@ -1,0 +1,149 @@
+
+{% comment %} html code  {% endcomment %}
+<div class="slider-container">
+    <div class="slide-box">
+      <img src="https://c4.wallpaperflare.com/wallpaper/797/146/421/landscape-bora-bora-wallpaper-preview.jpg" class="image" alt="">
+      <div class="content">
+        <h2>Maldive</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <button>Discover</button>
+      </div>
+    </div>
+    <div class="slide-box">
+      <img src="https://c4.wallpaperflare.com/wallpaper/737/190/347/istanbul-city-sultanahmet-mosque-turkey-wallpaper-preview.jpg" class="image" alt="">
+      <div class="content">
+        <h2>Turkey</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <button>Discover</button>
+      </div>
+    </div>
+    <div class="slide-box active">
+      <img src="https://c4.wallpaperflare.com/wallpaper/327/532/992/nature-norway-tilt-shift-digital-art-wallpaper-preview.jpg" class="image" alt="">
+      <div class="content">
+        <h2>Norway</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <button>Discover</button>
+      </div>
+    </div>
+    <div class="slide-box">
+      <img src="https://c1.wallpaperflare.com/preview/914/450/462/great-wall-china-great-chinese.jpg" class="image" alt="">
+      <div class="content">
+        <h2>China</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <button>Discover</button>
+      </div>
+    </div>
+    <div class="slide-box">
+      <img src="https://c4.wallpaperflare.com/wallpaper/211/1016/1022/kasbah-ruins-sand-morocco-wallpaper-preview.jpg" class="image" alt="">
+      <div class="content">
+        <h2>Morocco</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <button>Discover</button>
+      </div>
+    </div>
+  </div>
+
+
+
+{% comment %} slider css {% endcomment %}
+
+  @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: "Nunito", sans-serif;
+}
+
+.slider-container {
+  background-color: #fff;
+  display: flex;
+  height: 100vh;
+}
+.slide-box {
+  flex-grow: 1;
+  overflow: hidden;
+  margin: 5px;
+  cursor: pointer;
+  text-align: center;
+  position: relative;
+  flex-basis: 0px;
+  border-radius: 5px;
+  transition: flex-grow 0.5s ease-in, box-shadow 0.15s linear;
+}
+.slide-box::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.22);
+}
+.slide-box.active {
+  flex-grow: 10;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
+}
+.slide-box:hover {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
+}
+.slide-box .image {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.slide-box .content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  z-index: 5;
+  color: #fff;
+  transition: all 0.6s ease-in;
+}
+.slide-box.active .content {
+  width: 50%;
+  max-width: 450px;
+  transform: translate(-50%, -50%) scale(1);
+}
+.slide-box .content h2 {
+  font-size: 2.6rem;
+}
+.slide-box .content p {
+  margin-top: 1.5rem;
+}
+.slide-box button {
+  display: inline-block;
+  font-family: "Nunito", sans-serif;
+  font-size: 1.1rem;
+  margin-top: 1.5rem;
+  padding: 5px 25px;
+  background-color: #00a4e4;
+  border: 1px solid #00a4e4;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s linear;
+}
+.slide-box button:hover {
+  background-color: transparent;
+  border-color: #fff;
+  color: #fff;
+}
+
+
+
+
+{% comment %} slider js  {% endcomment %}
+const slidesElm = document.querySelectorAll(".slider-container .slide-box");
+
+Array.from(slidesElm).forEach((slide) => {
+  slide.addEventListener("click", () => {
+    Array.from(slidesElm).forEach((sld) => sld.classList.remove("active"));
+    slide.classList.add("active");
+  });
+});

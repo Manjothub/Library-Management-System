@@ -37,8 +37,25 @@
                         <input type="text" class="form-control mt-2" name="isbn" placeholder="Enter ISBN number of the book" id="isbnnumber" required>
                     </div>
                 </div>
-
-                
+                <div class="row mt-4">
+                  <div class="form-group col-md-12">
+                      <label><i style="font-weight: bold;">Book Image </i></label>
+                      <img src="" alt=""  height="50px" width="50px" id="coverpic">
+                      <input type="file" class="form-control mt-2" name="book_image" required>
+                  </div>
+              </div>
+              <div class="row mt-4">
+                  <div class="form-group col-md-12">
+                      <label><i style="font-weight: bold;">Upload Book</i></label>
+                      <input type="file" class="form-control mt-2" name="book_src" id="srcbook"  required>
+                  </div>
+              </div>
+              <div class="row mt-4">
+                <div class="form-group col-md-12">
+                    <label><i style="font-weight: bold;">Description</i></label>
+                    <textarea name="book_desc" class="form-control mt-2" id="description" cols="30" rows="5"></textarea>
+                </div>
+              </div>
                 <div class="row mt-4">
                     <div class="form-group col-md-12">
                         <label><i style="font-weight: bold;">Volume </i></label>
@@ -51,6 +68,18 @@
                         <input type="text" class="form-control mt-2" name="category" placeholder="Enter Category of the book" id="bookcategory" required>
                     </div>
                 </div>
+                <div class="row mt-4">
+                  <div class="form-group col-md-12">
+                      <label><i style="font-weight: bold;">Published Date</i></label>
+                      <input type="date" class="form-control mt-2" name="published_date" required>
+                  </div>
+              </div>
+              <div class="row-mt-4">
+                  <div class="form-group col-md-12">
+                      <span>Availability </span>
+                      <input type="checkbox" name="availability" id="status" >
+                  </div>
+              </div>
                 <button type="submit" class="btn btn-primary mt-5">Update</button>
             </form>
 
@@ -79,18 +108,16 @@
             </tr>
           </thead>
           <tbody id="showbooktablebody">
-            <!-- <td>{{forloop.counter}}.</td>
-            <td>{{book.name}}</td>
-            <td>{{book.author}}</td>
-            <td>{{book.isbn}}</td>
-            <td>{{book.category}}</td> -->
+
               {% for book in books %}
             <tr>
                 <td>{{forloop.counter}}</td>
               <td>
-                  <div class="d-flex align-items-center">
-                    <div class="">
-                      <p class="font-weight-bold mb-0">{{book.name}}</p>
+                <div class="d-flex align-items-center">
+                    <div style="display: flex; align-items: center;">
+                        <img class="avatar-img rounded-circle" src={{book.book_image.url}} alt="User Image" style="height: 50px; width: 50px">
+          
+                        <p class="font-weight-bold mb-0" style="font-size: 15px; margin-left: 10px; font-weight: 700;">{{book.name}}</p>
                     </div>
                   </div>
               </td>
@@ -203,6 +230,10 @@ $("#example").DataTable({
                     document.getElementById("isbnnumber").value = res.res[0].isbn;
                     document.getElementById("bookvolume").value = res.res[0].volume;
                     document.getElementById("bookcategory").value = res.res[0].category;
+                    document.getElementById("description").value = res.res[0].description;
+                    document.getElementById("coverpic").src =  'http://127.0.0.1:8000/media/'+ res.res[0].book_image;
+                    document.getElementById("status").checked = res.res[0].availability;
+                    document.getElementById("srcbook").src = res.res[0].book_src;
                     $("#hiddenfield").attr('value', res.res[0].id);
 
                 }

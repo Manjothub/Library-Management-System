@@ -13,50 +13,50 @@
     <div class="row all-boxes">
 
         <div class="col-md-3">
-            <a href="#" style="color: #516BEB; text-decoration: none;">
+            <a href="{% url 'studentviewbooks' %}" style="text-decoration: none; color: rgb(46, 44, 44);;">
                 <div class="card text-center" style="margin: 35px 0; padding: 10px; box-shadow: 5px 5px 5px rgba(0,0,0,0.1);">
                     <div class="text-center">
                         <i class="fa-solid fa-book-open-reader" style="font-size: 89px;margin: 15px;"  ></i>
                     </div>
-                    <h4>5</h4>
+                    <h4>{{books}}</h4>
                     <h3>Books</h3>
                 </div>
             </a>
         </div>
 
         <div class="col-md-3">
+            <a href="{% url 'student_issued_book' %}" style="text-decoration: none; color: rgb(46, 44, 44);">
             <div class="card text-center" data-bs-toggle="modal" data-bs-target="#AddBook" style="cursor: pointer; margin: 35px 0; padding: 10px; box-shadow: 5px 5px 5px rgba(0,0,0,0.1);">
                 <div class="text-center">
-                    <i class="fa-solid fa-book-medical" style="font-size: 89px;margin: 15px;"  ></i>
+                    <i class="fa-solid fa-book-open" style="font-size: 89px;margin: 15px;"  ></i>
                 </div>
-                <h4>2</h4>
+                <h4>{{issuedBooksdata}}</h4>
                 <h3> Book Issued </h3>
             </div>
+            </a>
         </div>
         <div class="col-md-3">
             <div class="card text-center" data-bs-toggle="modal" data-bs-target="#AddBook" style="cursor: pointer; margin: 35px 0; padding: 10px; box-shadow: 5px 5px 5px rgba(0,0,0,0.1);">
                 <div class="text-center">
-                    <i class="fa-solid fa-book-medical" style="font-size: 89px;margin: 15px;"  ></i>
+                    <i class="fa-solid fa-book-bible" style="font-size: 89px;margin: 15px;"  ></i>
                 </div>
                 <h4>2</h4>
                 <h3>Request a Book</h3>
             </div>
         </div>
         <div class="col-md-3">
-            <div class="card text-center" data-bs-toggle="modal" data-bs-target="#AddBook" style="cursor: pointer; margin: 35px 0; padding: 10px; box-shadow: 5px 5px 5px rgba(0,0,0,0.1);">
+            <div class="card text-center" data-bs-toggle="modal" data-bs-target="#AddBook" style="cursor: pointer; margin: 35px 0; padding: 10px; height: 76%; box-shadow: 5px 5px 5px rgba(0,0,0,0.1);">
                 <div class="text-center">
-                    <i class="fa-solid fa-book-medical" style="font-size: 89px;margin: 15px;"  ></i>
+                    <i class="fa-brands fa-angellist" style="font-size: 89px;margin: 15px;"  ></i>
                 </div>
-                <h4>2</h4>
                 <h3 >Profile </h3>
             </div>
         </div>
         <div class="col-md-3">
             <div class="card text-center" data-bs-toggle="modal" data-bs-target="#AddBook" style="cursor: pointer; margin: 35px 0; padding: 10px; box-shadow: 5px 5px 5px rgba(0,0,0,0.1);">
                 <div class="text-center">
-                    <i class="fa-solid fa-book-medical" style="font-size: 89px;margin: 15px;"  ></i>
+                    <i class="fa-solid fa-key" style="font-size: 89px;margin: 15px;"  ></i>
                 </div>
-                <h4>2</h4>
                 <h3> Changed Password </h3>
             </div>
         </div>
