@@ -1,3 +1,4 @@
+from re import S
 from django.db import models
 from django.contrib.auth.models import User
 from datetime import datetime,timedelta
@@ -32,7 +33,10 @@ class Student(models.Model):
 
 
 class IssuedBook(models.Model):
-    user = models.OneToOneField(User, on_delete=models.DO_NOTHING,null=True)
+    student_name= models.ForeignKey(Student, on_delete=models.CASCADE,null=True)
     book_name= models.ForeignKey(Book,on_delete=models.CASCADE,null=True)
+    author_name = models.CharField(max_length=200,null=True)
     isbn = models.CharField(max_length=13)
+    Volume = models.CharField(max_length=50,null=True)
+    category = models.CharField(max_length=100,null=True)
     issued_date = models.DateField(auto_now=True)

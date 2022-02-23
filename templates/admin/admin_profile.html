@@ -19,21 +19,18 @@
                     </label>
                     <img src="https://i.ibb.co/yNGW4gg/avatar.png" id="blah" alt="Avatar">
                 </section>
-                <h1>Bharadwaj</h1>
-                <h3>Web Designer & Developer</h3>
+                <h1>d</h1>
+                <h3>{{user}}</h3>
             </td>
-            <td>
+            <td style="box-shadow: 3px 3px 10px rgba(0,0,0,0.1)">
                 <ul>
-                    <li><b style="color: #000;">Full name</b> <input type="text" name="fname" id="fname" maxlength="100" value="Bharadwaj"
+                    <li><b style="color: #000; font-size: 18px;">Full name</b> 
+                        <input type="text" name="fname" id="fname" maxlength="100" value="{{user}}" style="margin-left: 30px;"
                             required /> 
                     </li>
-                    <li><b style="color: #000;">Email</b> <input type="email" name="email" id="email" maxlength="150"
-                            value="Bharadwajyl@gmail.com" required /></li>
-                    <li><b style="color: #000;">Contact number</b> <input type="tel" name="mobile" id="mobile" maxlength="10"
-                            value="0123456789" required /> 
-                    </li>
-                    <li><b style="color: #000;">Address</b> <input type="text" name="address" id="address" maxlength="250"
-                            value="Street, Pincode, Province/State, Country" required /> 
+                    <li><b style="color: #000; font-size: 18px;">Email</b> 
+                        <input type="email" name="email" id="email" maxlength="150" style="margin-left: 30px;"
+                            value="{{user.email}}"/>
                     </li>
                 </ul>
             </td>

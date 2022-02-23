@@ -9,10 +9,16 @@
                 <li class="lists"><a href="{% url 'index' %}">Home</a></li>
                 <li class="lists"><a href="">About</a></li>
                 <li class="lists"><a href="{% url 'student_registration' %}">Register</a></li>
-                <li class="lists"><a href="">Contact</a></li>
+                <li class="lists"><a href="{% url 'contactpage' %}">Contact</a></li>
                 <li style="margin-top: 5px; font-size: 20px;">
+                    {% if request.user.is_authenticated %}
                     <button style="background-color: blue; border: none; outline: none; padding: 10px; width: 100px; border-radius: 12px;  margin-left: 15px;"><a href="{% url 'student_login' %}" style="color: #fff; text-decoration: none;">Student</a></button>
                     <button style="background-color: blue; border: none; outline: none; padding: 10px; width: 100px; border-radius: 12px;  margin-left: 15px;"><a href="{% url 'admin_login' %}" style="color: #fff; text-decoration: none;">Admin</a></button>
+                    <button style="background-color: #B33030; border: none; outline: none; padding: 10px; width: 100px; border-radius: 12px;  margin-left: 15px;"><a href="{% url 'logout' %}" style="color: #fff; text-decoration: none;">Logout</a></button>
+                    {% else %}
+                    <button style="background-color: blue; border: none; outline: none; padding: 10px; width: 100px; border-radius: 12px;  margin-left: 15px;"><a href="{% url 'student_login' %}" style="color: #fff; text-decoration: none;">Student</a></button>
+                    <button style="background-color: blue; border: none; outline: none; padding: 10px; width: 100px; border-radius: 12px;  margin-left: 15px;"><a href="{% url 'admin_login' %}" style="color: #fff; text-decoration: none;">Admin</a></button>
+                    {% endif %}
                 </li>
             </ul>
         </div>

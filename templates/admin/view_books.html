@@ -74,6 +74,7 @@
               <th>Volume</th>
               <th>ISBN Number</th>
               <th>Category</th>
+              <th>Status</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -124,6 +125,19 @@
                     <p class="font-weight-bold mb-0">{{book.category}}</p>
                   </div>
                 </div>
+            </td>
+            <td>
+              <div class="d-flex align-items-center">
+                {% if book.availability == True %}
+                <div class="">
+                  <p class="font-weight-bold mb-0" style="color: rgb(43, 207, 43); font-size: 25px;"><i class="fa-solid fa-circle-check"></i></p>
+                </div>
+                {% else %}
+                <div class="">
+                  <p class="font-weight-bold mb-0" style="color: rgb(247, 47, 47); font-size: 25px; "><i class="fa-solid fa-circle-xmark"></i></p>
+                </div>
+                {% endif %}
+              </div>
             </td>
             <td>
                         <button type="button" id="updatebookbtn" class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#editBook" data-iid={{book.id}}>

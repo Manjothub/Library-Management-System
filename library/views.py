@@ -66,22 +66,39 @@ def view_students(request):
 
 @login_required(login_url = '/admin_login')
 def issue_book(request):
-    # form = forms.IssueBookForm()
-    # if request.method == "POST":
-    #     form = forms.IssueBookForm(request.POST)
-    #     if form.is_valid():
-    #         obj = models.IssuedBook()
-    #         obj.student_id = request.POST['name2']
-    #         obj.isbn = request.POST['isbn2']
-    #         obj.save()
-    #         alert = True
-    #         return render(request, "admin/issue_book.html", {'obj':obj, 'alert':alert})
-    return render(request, "admin/issue_book.html")
+    if request.method == 'POST':
+        book_name=request.POST.get('name')
+        author_name=request.POST.get('author')
+        student_id= request.POST.get('student_id')
+        isbn_number = request.POST.get('isbn')
+        book_volume = request.POST.get('volume')
+        book_category = request.POST.get('category')
+        books = Book.objects.get(id=book_name)
+        student = Student.objects.get(id=student_id)
+        issuebook = IssuedBook(
+            student_name =student,
+            book_name =books,
+            isbn = isbn_number,
+            Volume = book_volume,
+            author_name = author_name,
+            category = book_category
+        )
+        if issuebook is not None:
+            issuebook.save()
+            messages.success(request,'Book Issued Sucessfully')
+            return redirect('admin_dashboard')
+        else:
+            messages.error(request,'Book Issued Failed')
+            return redirect('admin_dashboard')
+    return render(request, "admin/admin_dashboard.html")
 
 @login_required(login_url = '/admin_login')
 def view_issued_book(request):
     issuedBooks = IssuedBook.objects.all()
     return render(request, "admin/view_issued_book.html", {'issuedBooks':issuedBooks})
+
+
+
 
 @login_required(login_url = '/student_login')
 def student_issued_books(request):
@@ -107,7 +124,11 @@ def student_issued_books(request):
     return render(request,'admin/student_issued_books.html')
 
 def admin_profile(request):
-    return render(request,'admin/admin_profile.html')
+    user = User.objects.get(id=request.user.id)
+    context ={
+        "user":user
+    }
+    return render(request,'admin/admin_profile.html',context)
 
 
 @login_required(login_url = '/student_login')
@@ -181,13 +202,12 @@ def student_registration(request):
             return render(request, "admin/student_registration.html", {'passnotmatch':passnotmatch})
 
         user = User.objects.create_user(username=username, email=email, password=password,first_name=first_name, last_name=last_name)
-        # print(user)
         student = Student.objects.create(user=user, phone=phone, branch=branch,student_dob=date_birth,gender=gender,roll_no=roll_no, image=image)
         
         user.save()
         student.save()
         # alert = True
-        return render(request, "admin/student_registration.html")
+        return redirect('student_login')
     return render(request, "admin/student_registration.html")
 
 def student_login(request):
@@ -201,7 +221,7 @@ def student_login(request):
             if request.user.is_superuser:
                 return HttpResponse("You are not a student!!")
             else:
-                return redirect("/profile")
+                return redirect("studentdashboard")
         else:
             alert = True
             return render(request, "student/student_login.html", {'alert':alert})
@@ -230,4 +250,24 @@ def Logout(request):
 
 
 def admin_dashboard(request):
-    return render(request,'admin/admin_dashboard.html')
+    books = Book.objects.all()
+    student = Student.objects.all()
+    studentdata = Student.objects.all().count()
+    bookdata = Book .objects.all().count()
+    
+    bookissuedata = IssuedBook.objects.all().count()
+    context ={
+        'books':books,
+        'students':student,
+        'data':studentdata,
+        'bookdata':bookdata,
+        'issuedata':bookissuedata
+    }
+    return render(request,'admin/admin_dashboard.html',context)
+
+
+def student_dashboard(request):
+    return render(request,'student/student_dashboard.html')
+
+def contactus(request):
+    return render(request,'common/contact_us.html')

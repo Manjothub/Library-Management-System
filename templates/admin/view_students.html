@@ -1,4 +1,4 @@
-{% extends 'common/admin_navbar.html' %}
+{% extends 'common/basic.html' %}
 {% load static %}
 {% block title %} All Students List {% endblock %}
 {% block css %}
@@ -15,7 +15,6 @@
                 <th>Email</th>
                 <th>Mobile Number</th>
                 <th>Branch</th>
-                <th>Class</th>
                 <th>Roll Number</th>
                 <th>Delete</th>
             </tr>
@@ -29,7 +28,6 @@
                 <td>{{student.user.email}}</td>
                 <td>{{student.phone}}</td>
                 <td>{{student.branch}}</td>
-                <td>{{student.classroom}}</td>
                 <td>{{student.roll_no}}</td>
                 <td><a href="/delete_student/{{student.id}}/" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this student?')">Delete</a></td>
             </tr>
@@ -38,3 +36,32 @@
     </table>
     </div>
 {% endblock %}
+{% block js %}
+  <script>
+$(document).ready(function () {
+$("#example").DataTable({
+    aaSorting: [],
+    responsive: true,
+
+    columnDefs: [
+      {
+        responsivePriority: 1,
+        targets: 0
+      },
+      {
+        responsivePriority: 2,
+        targets: -1
+      }
+    ]
+  });
+
+  $(".dataTables_filter input")
+    .attr("placeholder", "Search here...")
+    .css({
+      width: "300px",
+      display: "inline-block"
+    });
+})
+
+  </script>
+{% endblock js %}

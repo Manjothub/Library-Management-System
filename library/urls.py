@@ -2,6 +2,7 @@ from django.urls import path
 from library .views import *
 
 urlpatterns = [
+    # admin URLS
     path("", index, name="index"),
     path("admin_dashboard/",admin_dashboard,name="admin_dashboard"),
     path("add_book/", add_book, name="add_book"),
@@ -16,14 +17,20 @@ urlpatterns = [
     path("view_issued_book/", view_issued_book, name="view_issued_book"),
     path("admin_profile",admin_profile,name="adminprofile"),
     
-    path("student_issued_books/", student_issued_books, name="student_issued_books"),
-    path("profile/", profile, name="profile"),
-    path("edit_profile/", edit_profile, name="edit_profile"),
-    path("student_registration/", student_registration, name="student_registration"),
+    
+    
+    
+    #Student URLS
+    # path("student_issued_books/", student_issued_books, name="student_issued_books"),
+    path("student/profile", profile, name="profile"),
+    path("student/edit_profile", edit_profile, name="edit_profile"),
+    path("studnet/student_registration", student_registration, name="student_registration"),
     path("change_password/",change_password, name="change_password"),
     path("student_login/", student_login, name="student_login"),
+    path("student_dashboard", student_dashboard,name="studentdashboard"),
 
     path("logout/", Logout, name="logout"),
+    path("contact",contactus,name="contactpage")
 
     
     

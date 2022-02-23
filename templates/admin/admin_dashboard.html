@@ -90,37 +90,53 @@
                 <div class="row mt-4">
                     <div class="form-group col-md-12">
                         <label><i style="font-weight: bold;">Book Name</i></label>
-                        <input type="text" class="form-control mt-2" name="name" placeholder="Enter name of the Book" required>
+                        
+                        <select class="form-control" name="name" id="select_book" onchange="getdata()" required>
+                            <option selected disabled value="">Choose Book</option>
+                            {% for book in books %}
+                             <option value="{{book.id}}" data-book="{{book.author}}" id="book-{{book.id}}" data-isbn="{{book.isbn}}" data-volume="{{book.volume}}" data-category="{{book.category}}">{{book.name}}</option>
+                            {% endfor %}
+                          </select>
                     </div>
                 </div>
                 <div class="row mt-4">
                     <div class="form-group col-md-12">
                         <label><i style="font-weight: bold;">Author Name</i></label>
-                        <input type="text" class="form-control mt-2" name="author" placeholder="Enter name of the Author" required>
+                        <input type="text" class="form-control mt-2" id="author" name="author" required>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="form-group col-md-12">
+                        <label><i style="font-weight: bold;">Student Name</i></label>
+                        <select class="form-control"  name ="student_id" required>
+                            <option selected disabled value="">Choose Students</option>
+                            {% for student in students %}
+                             <option value="{{student.id}}">{{student.user.first_name}}&nbsp;{{student.user.last_name}}</option>
+                            {% endfor %}
+                          </select>
                     </div>
                 </div>
                 <div class="row mt-4">
                     <div class="form-group col-md-12">
                         <label><i style="font-weight: bold;">ISBN Number</i></label>
-                        <input type="text" class="form-control mt-2" name="isbn" placeholder="Enter ISBN number of the book" required>
+                        <input type="text" class="form-control mt-2" id="isbn" name="isbn" placeholder="Enter ISBN" required>
                     </div>
                 </div>                
                 <div class="row mt-4">
                     <div class="form-group col-md-12">
                         <label><i style="font-weight: bold;">Volume </i></label>
-                        <input type="text" class="form-control mt-2" name="volume" placeholder="Enter volume name" required>
+                        <input type="text" class="form-control mt-2" id="volume" name="volume" placeholder="Enter Book Volume" required>
                     </div>
                 </div>
                 
                 <div class="row mt-4">
                     <div class="form-group col-md-12">
                         <label><i style="font-weight: bold;">Category</i></label>
-                        <input type="text" class="form-control mt-2" name="category" placeholder="Enter Category of the book" required>
+                        <input type="text" class="form-control mt-2" id="category" name="category" placeholder="Enter Category" required>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary mt-5">Add Book</button>
+                <button type="submit" class="btn btn-primary mt-5">Issue Book</button>
             </form>
-
         </div>
         
       </div>
@@ -129,8 +145,8 @@
 <!-- Model End -->
 
  
-    <div style="margin: 0 50px">
 
+<div style="margin: 0 50px">
     <div>
         <h3 style="font-weight: 800; margin-top: -45px;">ADMIN DASHBOARD</h3>
         <hr />
@@ -139,12 +155,12 @@
     <div class="row all-boxes">
 
         <div class="col-md-3">
-            <a href="#" style="color: #D9534F; text-decoration: none;">
+            <a href="{% url 'view_students' %}" style="color: #D9534F; text-decoration: none;">
                 <div class="card text-center" style="margin: 35px 0; padding: 10px; box-shadow: 5px 5px 5px rgba(0,0,0,0.1);">
                     <div class="text-center">
                         <i class="fa-solid fa-users" style="font-size: 89px;margin: 15px;"  ></i>
                     </div>
-                    <h4>2</h4>
+                    <h4>{{data}}</h4>
                     <h3>Students</h3>
                 </div>
             </a>
@@ -155,7 +171,7 @@
                 <div class="text-center">
                     <i class="fa-solid fa-book-medical" style="font-size: 89px;margin: 15px;"  ></i>
                 </div>
-                <h4>2</h4>
+                <h4>{{bookdata}}</h4>
                 <h3>Add Books</h3>
             </div>
         </div>
@@ -166,11 +182,12 @@
                 <div class="text-center">
                     <i class="fa-solid fa-book" style="font-size: 89px;margin: 15px;"  ></i>
                 </div>
-                <h4>2</h4>
+                <h4>{{bookdata}}</h4>
                 <h3>Books List</h3>
             </div>
             </a>
         </div>
+
 
         <div class="col-md-3">
             <a href="{% url 'view_issued_book' %}" style="color: rgb(61, 60, 60); text-decoration: none;">
@@ -178,7 +195,7 @@
                 <div class="text-center">
                     <i class="fa-solid fa-list-check" style="font-size: 89px;margin: 15px;"  ></i>
                 </div>
-                <h4>2</h4>
+                <h4>{{issuedata}}</h4>
                 <h3>Issued Books</h3>
             </div>
             </a>
@@ -192,31 +209,18 @@
                 <div class="text-center">
                     <i class="fa-solid fa-money-check-dollar" style="font-size: 89px;margin: 15px;" ></i>
                 </div>
-                <h4>2</h4>
+                <h4>{{issuedata}}</h4>
                 <h3>Issue a Book</h3>
             </div>
 
         </div>
-
-        <div class="col-md-3">
-            <a href="#" style="color: #3E8E7E; text-decoration: none;">
-            <div class="card text-center" style="margin: 35px 0; padding: 10px; box-shadow: 5px 5px 5px rgba(0,0,0,0.1);">
-                <div class="text-center">
-                    <i class="fa-solid fa-sitemap" style="font-size: 89px;margin: 15px;"  ></i>
-                </div>
-                <h4>2</h4>
-                <h3>Category List</h3>
-            </div>
-            </a>
-        </div>
-
         <div class="col-md-3">
             <a href="{% url 'adminprofile' %}" style="color: #055052; text-decoration: none;">
-            <div class="card text-center" style="margin: 35px 0; padding: 10px; box-shadow: 5px 5px 5px rgba(0,0,0,0.1);">
+            <div class="card text-center" style="margin: 35px 0; height: 218px; padding: 10px; box-shadow: 5px 5px 5px rgba(0,0,0,0.1);">
                 <div class="text-center">
                     <i class="fa-solid fa-id-card" style="font-size: 89px;margin: 15px;"  ></i>
                 </div>
-                <h3>Profile</h3>
+                <h3 style="margin-top: 38px;">Profile</h3>
             </div>
             </a>
         </div>
@@ -226,3 +230,18 @@
 
 </div>
 {% endblock %}
+
+
+{% block js %}
+  <script>
+        //function get form field 
+        getdata = function () {
+            var name = document.getElementById("select_book").value;
+            document.getElementById('author').value = document.getElementById('book-' + name).getAttribute('data-book')
+            document.getElementById('isbn').value = document.getElementById('book-' + name).getAttribute('data-isbn')
+            document.getElementById('volume').value = document.getElementById('book-' + name).getAttribute('data-volume')
+            document.getElementById('category').value = document.getElementById('book-' + name).getAttribute('data-category')
+        }
+
+  </script>
+{% endblock js %}
